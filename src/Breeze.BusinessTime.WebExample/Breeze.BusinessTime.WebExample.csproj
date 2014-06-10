@@ -203,6 +203,7 @@
     <Compile Include="App_Start\BreezeWebApiConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\Identity\ApplicationRoleManager.cs" />
     <Compile Include="Services\Identity\ApplicationUserManager.cs" />
     <Compile Include="Services\Identity\ApplicationUserStore.cs" />

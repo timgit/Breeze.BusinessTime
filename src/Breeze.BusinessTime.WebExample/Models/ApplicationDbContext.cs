@@ -14,5 +14,8 @@ namespace Breeze.BusinessTime.WebExample.Models
         }
 
         public DbSet<IdentityUserRole> UserRoles { get; set; }
+
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Dealer> Dealers { get; set; }
     }
 }
