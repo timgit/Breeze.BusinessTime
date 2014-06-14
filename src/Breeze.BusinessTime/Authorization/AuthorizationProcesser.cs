@@ -11,22 +11,22 @@ namespace Breeze.BusinessTime.Authorization
     {
         private IPrincipal User { get; set; }
         private IEnumerable<string> RoleWhiteList { get; set; }
-        private IAuthorizeAnEntity RoleProvider { get; set; }
+        private IAuthorizeAnEntity AuthorizationProvider { get; set; }
 
-        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity roleProvider) : this(user, roleProvider, new string[] { }) { }
+        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider) : this(user, authProvider, new string[] { }) { }
 
-        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity roleProvider, string allowedRole) : this(user, roleProvider, new[] { allowedRole }) { }
+        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider, string allowedRole) : this(user, authProvider, new[] { allowedRole }) { }
 
-        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity roleProvider, IEnumerable<string> allowedRoles)
+        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider, IEnumerable<string> allowedRoles)
         {
             if(user == null)
                 throw new Exception("IPrincipal cannot be null.");
 
-            if (roleProvider == null)
+            if (authProvider == null)
                 throw new Exception("IProvideRolesForAnEntity cannot be null.");
 
             User = user;
-            RoleProvider = roleProvider;            
+            AuthorizationProvider = authProvider;            
             RoleWhiteList = allowedRoles ?? new string[] {};      
         }
 
@@ -38,17 +38,14 @@ namespace Breeze.BusinessTime.Authorization
             {
                 var entityType = map.Key;
 
-                if (!RoleProvider.IsAuthorized(entityType, User))
+                if (!AuthorizationProvider.IsAuthorized(entityType, User))
                 {
-                    var errors = map.Value.Select(oi =>
-                        new EntityError
-                        {
-                            EntityTypeName = oi.Entity.ToString(),
+                    throw new EntityErrorsException(new[]{
+                        new EntityError{ 
+                            EntityTypeName = entityType.ToString(),
                             ErrorName = "Unauthorized",
                             ErrorMessage = "You are not authorized to save changes to this entity."
-                        });
-
-                    throw new EntityErrorsException(errors);
+                        }});
                 }
             });
         }

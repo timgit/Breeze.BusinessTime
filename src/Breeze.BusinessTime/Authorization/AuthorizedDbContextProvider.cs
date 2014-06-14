@@ -7,6 +7,9 @@ namespace Breeze.BusinessTime.Authorization
 {
     public class AuthorizedDbContextProvider<T>: PipelinedDbContextProvider<T> where T : DbContext, new()
     {
+        public AuthorizedDbContextProvider(IPrincipal user)
+            : this(user, new AttributeAuthorizationProvider<AuthorizeEntityAttribute>(), new string[] { }) { }
+
         public AuthorizedDbContextProvider(IPrincipal user, IAuthorizeAnEntity roleProvider) 
             : this(user, roleProvider, new string[] { }) { }
 

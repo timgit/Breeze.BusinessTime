@@ -35,7 +35,7 @@ namespace Breeze.BusinessTime.Rules
         protected Dictionary<Type, List<EntityInfo>> ProcessPipeline(Dictionary<Type, List<EntityInfo>> saveMap)
         {
             if(Pipeline != null && Pipeline.Any())
-                Pipeline.ToList().ForEach(pipe => pipe.Process(saveMap));
+                Pipeline.ForEach(pipe => pipe.Process(saveMap));
 
             return saveMap;
         }

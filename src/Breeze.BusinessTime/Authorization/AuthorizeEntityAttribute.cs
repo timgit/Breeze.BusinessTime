@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
 
 namespace Breeze.BusinessTime.Authorization
@@ -8,32 +7,43 @@ namespace Breeze.BusinessTime.Authorization
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class AuthorizeEntityAttribute: Attribute, IAuthorize
     {
-        public string Roles { get; set; }
-        public string Users { get; set; }
+        public string Roles
+        {
+            get { return _authorizer.Roles; }
+            set { _authorizer.Roles = value; }
+        }
+
+        public string Users
+        {
+            get { return _authorizer.Users; }
+            set { _authorizer.Users = value; }
+        }
+
+        private readonly Authorizer _authorizer = new Authorizer();
+
+        public bool IsAuthorized()
+        {
+            return _authorizer.IsAuthorized();
+        }
 
         public bool IsAuthorized(string userName)
         {
-            return HasUser(userName);
+            return _authorizer.IsAuthorized(userName);
         }
 
         public bool IsAuthorized(IPrincipal user)
         {
-            return HasUser(user.Identity.Name) || GetRoles().Any(user.IsInRole);
-        }
-
-        private bool HasUser(string user)
-        {
-            return GetUsers().Any(u => u.Equals(user));
+            return _authorizer.IsAuthorized(user);
         }
 
         public IEnumerable<string> GetUsers()
         {
-            return Users.Split(',');
+            return _authorizer.GetUsers();
         }
 
         public IEnumerable<string> GetRoles()
         {
-            return Roles.Split(',');
+            return _authorizer.GetRoles();
         }
     }
 }

@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6F2144
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breeze.BusinessTime.Tests", "Breeze.BusinessTime.Tests\Breeze.BusinessTime.Tests.csproj", "{0F39087F-4EF7-4149-A6F0-AACC06709A5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{36C4A820-F12D-4F8D-A048-DEF757DB8D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36C4A820-F12D-4F8D-A048-DEF757DB8D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36C4A820-F12D-4F8D-A048-DEF757DB8D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F39087F-4EF7-4149-A6F0-AACC06709A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F39087F-4EF7-4149-A6F0-AACC06709A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F39087F-4EF7-4149-A6F0-AACC06709A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F39087F-4EF7-4149-A6F0-AACC06709A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
