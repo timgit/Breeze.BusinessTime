@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using Breeze.BusinessTime.Authorization;
+using Breeze.BusinessTime.Tests.Helpers;
 using Breeze.ContextProvider;
 using NUnit.Framework;
 

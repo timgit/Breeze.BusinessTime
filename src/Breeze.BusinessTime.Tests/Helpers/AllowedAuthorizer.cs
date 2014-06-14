@@ -2,7 +2,7 @@
 using System.Security.Principal;
 using Breeze.BusinessTime.Authorization;
 
-namespace Breeze.BusinessTime.Tests
+namespace Breeze.BusinessTime.Tests.Helpers
 {
     public class AllowedAuthorizer: IAuthorizeAnEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Breeze.ContextProvider;
 
-namespace Breeze.BusinessTime.Tests
+namespace Breeze.BusinessTime.Tests.Helpers
 {
     public class FakeEntityInfo:EntityInfo
     {
