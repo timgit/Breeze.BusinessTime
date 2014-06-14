@@ -13,13 +13,13 @@ namespace Breeze.BusinessTime.Authorization
         public string Users
         {
             get { return _users; }
-            set { _users = value.Replace(" ", string.Empty); }
+            set { _users = (value == null) ? null : value.Replace(" ", string.Empty); }
         }
 
         public string Roles
         {
             get { return _roles; }
-            set { _roles = value.Replace(" ", string.Empty); }
+            set { _roles = (value == null) ? null : value.Replace(" ", string.Empty); }
         }
 
         /// <summary>
