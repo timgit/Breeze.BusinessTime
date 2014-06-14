@@ -21,14 +21,14 @@ namespace Breeze.BusinessTime.Authorization
         {
             var attribute = GetAttribute(entityType);
 
-            return (attribute != null) && attribute.IsAuthorized(userName);
+            return attribute == null || attribute.IsAuthorized(userName);
         }
 
         public bool IsAuthorized(Type entityType, IPrincipal user)
         {
             var attribute = GetAttribute(entityType);
 
-            return (attribute != null) && attribute.IsAuthorized(user);
+            return attribute == null || attribute.IsAuthorized(user);
         }
 
         private static T GetAttribute(Type entityType)

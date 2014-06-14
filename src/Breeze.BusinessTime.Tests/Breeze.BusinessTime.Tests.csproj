@@ -61,9 +61,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AuthorizerTests.cs" />
     <Compile Include="Helpers\AllowedAuthorizer.cs" />
     <Compile Include="Helpers\DeniedAuthorizer.cs" />
+    <Compile Include="Helpers\FakeEntity.cs" />
     <Compile Include="Helpers\FakeEntityInfo.cs" />
+    <Compile Include="Helpers\PrincipalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuthorizationProcessorTests.cs" />
   </ItemGroup>

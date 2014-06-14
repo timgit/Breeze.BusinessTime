@@ -37,13 +37,18 @@ namespace Breeze.BusinessTime.Authorization
             return this;
         }
 
+        public void Clear()
+        {
+            _registry.Clear();
+        }
+
         public bool IsAuthorized(Type entityType, string userName)
         {
             Authorizer authorizer;
 
             _registry.TryGetValue(entityType, out authorizer);
             
-            return authorizer != null && authorizer.IsAuthorized(userName);
+            return authorizer == null || authorizer.IsAuthorized(userName);
         }
 
         public bool IsAuthorized(Type entityType, IPrincipal user)
@@ -52,7 +57,7 @@ namespace Breeze.BusinessTime.Authorization
 
             _registry.TryGetValue(entityType, out authorizer);
 
-            return authorizer != null && authorizer.IsAuthorized(user);
+            return authorizer == null || authorizer.IsAuthorized(user);
         }
     }
 }

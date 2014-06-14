@@ -7,8 +7,20 @@ namespace Breeze.BusinessTime.Authorization
 {
     public class Authorizer: IAuthorize
     {
-        public string Users { get; set; }
-        public string Roles { get; set; }
+        private string _users;
+        private string _roles;
+
+        public string Users
+        {
+            get { return _users; }
+            set { _users = value.Replace(" ", string.Empty); }
+        }
+
+        public string Roles
+        {
+            get { return _roles; }
+            set { _roles = value.Replace(" ", string.Empty); }
+        }
 
         /// <summary>
         /// An empty IsAuthorized call would be for checking if a user is authenticated or not

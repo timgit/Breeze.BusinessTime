@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using Breeze.BusinessTime.Authorization;
+using Breeze.BusinessTime.Rules;
 using Breeze.BusinessTime.Tests.Helpers;
 using Breeze.ContextProvider;
 using NUnit.Framework;
@@ -12,13 +13,10 @@ namespace Breeze.BusinessTime.Tests
     public class AuthorizationProcessorTests
     {
         private IPrincipal _adminBob;
-        //private IPrincipal _superRoy;
         private IPrincipal _goldMember;
         private IPrincipal _nullPrincipal;
 
-        private const string AdminRole = "admin";
-        //private const string SupervisorRole = "supervisor";
-        private const string MemberRole = "goldmember";
+        private string _adminRole;
 
         private Dictionary<Type, List<EntityInfo>> _entitySaveMap;
         private RegistryAuthorizationProvider _authorizationRegistry;
@@ -26,33 +24,38 @@ namespace Breeze.BusinessTime.Tests
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
-            _nullPrincipal = createPrincipal();
-            _adminBob = createPrincipal("adminBob", new[] {AdminRole});
-            //_superRoy = createPrincipal("superRoy", new[] {SupervisorRole});
-            _goldMember = createPrincipal("goldMember", new[] {MemberRole});
+            _adminRole = PrincipalHelper.GetAdminRoleName();
+            _nullPrincipal = PrincipalHelper.CreatePrincipal();
+            _adminBob = PrincipalHelper.CreateAdminPrincipal("adminBob");
+            _goldMember = PrincipalHelper.CreatePrincipal("goldMember", "member");
 
-            _entitySaveMap = new Dictionary<Type, List<EntityInfo>>
-            {
-                {
-                    typeof (Object), new List<EntityInfo>
-                    {
-                        new FakeEntityInfo
-                        {
-                            EntityState = EntityState.Added
-                        }
-                    }
-                }
-            };
-
-            _authorizationRegistry = RegistryAuthorizationProvider
-                .Create()
-                .Register<Object>(AdminRole);
+            _entitySaveMap = new Dictionary<Type, List<EntityInfo>>();
+            _authorizationRegistry = new RegistryAuthorizationProvider();
         }
 
-        //[SetUp]
-        //public void TestSetup()
-        //{
-        //}
+        [SetUp]
+        public void Setup()
+        {
+            _entitySaveMap.Add(typeof(Object), new List<EntityInfo> { new FakeEntityInfo { EntityState = EntityState.Added }});
+            _authorizationRegistry.Register<Object>(_adminRole);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _entitySaveMap.Clear();
+            _authorizationRegistry.Clear();            
+        }
+
+        [Test]
+        public void MissingEntityRegistrationDoesNotDeny()
+        {
+            _entitySaveMap.Add(typeof(FakeEntity), new List<EntityInfo> { new FakeEntityInfo { EntityState = EntityState.Added } });
+
+            var processor = CreateAuthorizationProcesser(_adminBob);
+
+            Assert.DoesNotThrow(() => processor.Process(_entitySaveMap), "Unregistered entity type should not be denied.");
+        }
 
         [Test]
         public void AllowedProcessorShouldAlwaysSucceed()
@@ -73,7 +76,7 @@ namespace Breeze.BusinessTime.Tests
         [Test]
         public void WhitelistMembershipShouldBypassAuthorization()
         {
-            var processor = new AuthorizationProcesser(_adminBob, new DeniedAuthorizer(), AdminRole);
+            var processor = new AuthorizationProcesser(_adminBob, new DeniedAuthorizer(), _adminRole);
 
             Assert.DoesNotThrow(() => processor.Process(_entitySaveMap), "Whitelisted user should have bypassed authorization check.");
         }
@@ -81,7 +84,7 @@ namespace Breeze.BusinessTime.Tests
         [Test]
         public void UnauthorizedSaveAttemptShouldBeDenied()
         {
-            var processor = new AuthorizationProcesser(_goldMember, _authorizationRegistry);
+            var processor = CreateAuthorizationProcesser(_goldMember);
             Assert.Throws<EntityErrorsException>(() => processor.Process(_entitySaveMap),
                 "Processor allowed an unauthorized action.");
         }
@@ -89,15 +92,15 @@ namespace Breeze.BusinessTime.Tests
         [Test]
         public void AuthorizedSaveAttemptShouldSucceed()
         {
-            var processor = new AuthorizationProcesser(_adminBob, _authorizationRegistry);
+            var processor = CreateAuthorizationProcesser(_adminBob);
             Assert.DoesNotThrow(() => processor.Process(_entitySaveMap),
                 "Processor denied an authorized action.");
 
         }
 
-        private IPrincipal createPrincipal(string userName = "", string[] roles = null)
+        private IProcessBreezeRequests CreateAuthorizationProcesser(IPrincipal principal, params string[] allowedRoles)
         {
-            return new GenericPrincipal(new GenericIdentity(userName), roles);
+            return new AuthorizationProcesser(principal, _authorizationRegistry, allowedRoles);
         }
     }
 }

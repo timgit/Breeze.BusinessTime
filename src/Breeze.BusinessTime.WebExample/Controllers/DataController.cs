@@ -18,9 +18,7 @@ namespace Breeze.BusinessTime.WebExample.Controllers
 
         public DataController()
         {
-            var roleProvider = new AttributeAuthorizationProvider<AuthorizeEntityAttribute>();
-
-            ContextProvider = new AuthorizedDbContextProvider<ApplicationDbContext>(User, roleProvider, allowedRole: "Admin");
+            ContextProvider = new AuthorizedDbContextProvider<ApplicationDbContext>(User, "Admin");
         }
 
         [HttpGet]

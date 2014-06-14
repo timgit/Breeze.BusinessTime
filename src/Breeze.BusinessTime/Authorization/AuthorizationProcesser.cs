@@ -13,21 +13,20 @@ namespace Breeze.BusinessTime.Authorization
         private IEnumerable<string> RoleWhiteList { get; set; }
         private IAuthorizeAnEntity AuthorizationProvider { get; set; }
 
-        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider) : this(user, authProvider, new string[] { }) { }
+        public AuthorizationProcesser(IPrincipal user, params string[] allowedRoles)
+            : this(user, new AttributeAuthorizationProvider<AuthorizeEntityAttribute>(), allowedRoles) { }
 
-        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider, string allowedRole) : this(user, authProvider, new[] { allowedRole }) { }
-
-        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider, IEnumerable<string> allowedRoles)
+        public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider, params string[] allowedRoles)
         {
             if(user == null)
                 throw new Exception("IPrincipal cannot be null.");
 
             if (authProvider == null)
-                throw new Exception("IProvideRolesForAnEntity cannot be null.");
+                throw new Exception("IAuthorizeAnEntity cannot be null.");
 
             User = user;
-            AuthorizationProvider = authProvider;            
-            RoleWhiteList = allowedRoles ?? new string[] {};      
+            AuthorizationProvider = authProvider;
+            RoleWhiteList = allowedRoles;
         }
 
         public void Process(Dictionary<Type, List<EntityInfo>> saveMap)
