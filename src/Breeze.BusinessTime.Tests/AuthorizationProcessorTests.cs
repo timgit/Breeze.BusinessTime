@@ -44,7 +44,7 @@ namespace Breeze.BusinessTime.Tests
         public void TearDown()
         {
             _entitySaveMap.Clear();
-            _authorizationRegistry.Clear();            
+            _authorizationRegistry.Registry.Clear();            
         }
 
         [Test]

@@ -13,6 +13,11 @@ namespace Breeze.BusinessTime.Authorization
             _registry = new Dictionary<Type, Authorizer>();
         }
 
+        public Dictionary<Type, Authorizer> Registry
+        {
+            get { return _registry; }
+        }
+
         public static RegistryAuthorizationProvider Create()
         {
             return new RegistryAuthorizationProvider();
@@ -20,26 +25,8 @@ namespace Breeze.BusinessTime.Authorization
 
         public RegistryAuthorizationProvider Register<T>(string roles = null, string users = null)
         {
-            return Register(typeof(T), roles, users);
-        }
-
-        public RegistryAuthorizationProvider Register(Type type, string roles = null, string users = null)
-        {
-            if (_registry.ContainsKey(type))
-                throw new ArgumentException("This entity type is already in the registry.");
-
-            _registry.Add(type, new Authorizer
-            {
-                Roles = roles,
-                Users = users
-            });
-
+            _registry.Add(typeof(T), new Authorizer { Roles = roles, Users = users });
             return this;
-        }
-
-        public void Clear()
-        {
-            _registry.Clear();
         }
 
         public bool IsAuthorized(Type entityType, string userName)

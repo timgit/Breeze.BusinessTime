@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Breeze.BusinessTime</id>
+    <version>1.0.1</version>
+    <title>Breeze.BusinessTime</title>
+    <authors>Tim Jones</authors>
+    <owners>Tim Jones</owners>
+    <licenseUrl>https://github.com/timgit/Breeze.BusinessTime/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://timgit.github.io/Breeze.BusinessTime</projectUrl>
+    <iconUrl>http://www.breezejs.com/sites/all/images/breezepkg.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Business rules and authorization extensions for Breeze Server for Entity Framework 6</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014</copyright>
+	<tags>javascript WebApi Breeze SPA</tags>
+	<dependencies>
+		<dependency id="Breeze.Server.ContextProvider.EF6" version="1.4.5" />
+	</dependencies>
+  </metadata>
+	<files>
+		<file src="bin\Debug\Breeze.BusinessTime.dll" target="lib" /> 
+	</files>
+  </package>
