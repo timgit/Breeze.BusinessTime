@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Breeze.BusinessTime</id>
-    <version>1.0.2-alpha</version>
+    <version>$version$</version>
     <title>Breeze.BusinessTime</title>
     <authors>Tim Jones</authors>
     <owners>Tim Jones</owners>
