@@ -9,26 +9,44 @@ namespace Breeze.BusinessTime.Rules
 {
     public class PipelinedDbContextProvider<T>: EFContextProvider<T> where T : DbContext, new()
     {
-        private List<IProcessBreezeRequests> _beforePipeline;
-        private List<IProcessBreezeRequests> _afterPipeline;
+        public PipelinedDbContextProvider()
+        {
+            BeforeSaveEntitiesDelegate = ExecuteBeforePipeline;
+            AfterSaveEntitiesDelegate = ExecuteAfterPipeline;
+        }
 
+        internal PipelinedDbContextProvider(IProcessBreezeRequests processBefore, IProcessBreezeRequests processAfter)
+            : this(processBefore)
+        {
+            if (processAfter == null)
+                throw new ArgumentException("Argument processAfter (IProcessBreezeRequests) was null.");
+
+            BeforePipeline.Add(processBefore);
+        }
+
+        internal PipelinedDbContextProvider(IProcessBreezeRequests processBefore)
+            : this()
+        {
+            if (processBefore == null)
+                throw new ArgumentException("Argument processBefore (IProcessBreezeRequests) was null.");
+
+            BeforePipeline.Add(processBefore);
+        }
+
+        private List<IProcessBreezeRequests> _beforePipeline;
         public List<IProcessBreezeRequests> BeforePipeline
         {
             get { return _beforePipeline ?? (_beforePipeline = new List<IProcessBreezeRequests>()); }
             protected set { _beforePipeline = value; }
         }
 
+        private List<IProcessBreezeRequests> _afterPipeline;
         public List<IProcessBreezeRequests> AfterPipeline
         {
             get { return _afterPipeline ?? (_afterPipeline = new List<IProcessBreezeRequests>()); }
             protected set { _afterPipeline = value; }
         }
 
-        public PipelinedDbContextProvider()
-        {
-            BeforeSaveEntitiesDelegate = ExecuteBeforePipeline;
-            AfterSaveEntitiesDelegate = ExecuteAfterPipeline;
-        }
 
         private void ExecuteAfterPipeline(Dictionary<Type, List<EntityInfo>> saveMap, List<KeyMapping> keyMappings)
         {
@@ -55,24 +73,6 @@ namespace Breeze.BusinessTime.Rules
                         keyProp.SetValue(info.Entity, key.RealValue);
                 }
             ));            
-        }
-
-        public PipelinedDbContextProvider(IProcessBreezeRequests processBefore, IProcessBreezeRequests processAfter)
-            : this(processBefore)
-        {            
-            if (processAfter == null)
-                throw new ArgumentException("Argument processAfter (IProcessBreezeRequests) was null.");
-
-            BeforePipeline.Add(processBefore);
-        }
-
-        public PipelinedDbContextProvider(IProcessBreezeRequests processBefore)
-            : this()
-        {
-            if(processBefore == null)
-                throw new ArgumentException("Argument processBefore (IProcessBreezeRequests) was null.");
-
-            BeforePipeline.Add(processBefore);
         }
 
         protected Dictionary<Type, List<EntityInfo>> ExecuteBeforePipeline(Dictionary<Type, List<EntityInfo>> saveMap)
