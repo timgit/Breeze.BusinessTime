@@ -21,6 +21,6 @@ goto end
 :error
 echo ** Error: Missing version parameter.  
 echo Usage: pack VERSION [-push]
-echo For example: pack 1.0.3-alpha
+echo For example: pack 1.0.3-alpha -push
 
 :end
