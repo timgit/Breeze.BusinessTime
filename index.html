@@ -54,12 +54,13 @@
         <pre><code>PM&gt; Install-Package Breeze.BusinessTime</code></pre>
 
         <h3>
-        <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+        <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Typical Usage</h3>
 
         <ol>
             <li>Use with your normal Breeze Web API controllers</li>
-            <li>Replace your current context provider with an included new shiny one here (May we suggest AuthorizedDbContextProvider?)</li>
-            <li>Add AuthorizeEntity attributes to your model classes (if code first) or use the included RegistryAuthorizationProvider</li>
+            <li>Replace your current context provider with AuthorizedDbContextProvider</li>
+            <li>Add AuthorizeEntity attributes to your model classes or use the included RegistryAuthorizationProvider if you'd like to consolidate your authorization rules.</li>
+			<li>Test out your existing SaveChanges endpoint to verify all mutating actions are now authorized</li>
             <li>Bob's your uncle</li>
         </ol>
           
