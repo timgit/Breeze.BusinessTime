@@ -1,8 +1,12 @@
 using System.Data.Entity.Migrations;
+using Breeze.BusinessTime.WebExample.Models;
+using Breeze.BusinessTime.WebExample.Services.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Breeze.BusinessTime.WebExample.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -10,26 +14,47 @@ namespace Breeze.BusinessTime.WebExample.Migrations
             ContextKey = "Breeze.BusinessTime.WebExample.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(Breeze.BusinessTime.WebExample.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var userManager = new ApplicationUserManager(new ApplicationUserStore(context));
+            var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
 
-            // add roles
+            roleManager.CreateRole("Admin");
+            roleManager.CreateRole("Dealer");
+            roleManager.CreateRole("Owner");
 
-            // add admin user
-            // add dealer user
-            // add owner user
+            userManager.CreateUser("andy@admin.com", "999999", "Admin");
+            userManager.CreateUser("don@dealer.com", "333333", "Dealer");
+            userManager.CreateUser("bob@owner.com", "111111", "Owner");
+        }
+    }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+    public static class Extensions
+    {
+        public static void CreateRole(this ApplicationRoleManager roleManager, string name)
+        {
+            if (!roleManager.RoleExists(name))
+                roleManager.Create(new ApplicationRole(name));
+        }
+
+        public static void CreateUser(this ApplicationUserManager userManager, string username, string password, string role)
+        {
+            if (userManager.FindByName(username) != null)
+                return;
+
+            var user = new ApplicationUser
+            {
+                UserName = username, 
+                Email = username, 
+                EmailConfirmed = true
+            };
+
+            var result = userManager.Create(user, password);
+
+            if (result.Succeeded)
+            {
+                userManager.AddToRole(user.Id, role);
+            }
         }
     }
 }

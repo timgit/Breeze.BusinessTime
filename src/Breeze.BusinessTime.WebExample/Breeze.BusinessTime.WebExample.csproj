@@ -203,7 +203,12 @@
     <Compile Include="App_Start\BreezeWebApiConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Migrations\201410010519334_Initial.cs" />
+    <Compile Include="Migrations\201410010519334_Initial.Designer.cs">
+      <DependentUpon>201410010519334_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Services\BreezeAuditProcessor.cs" />
     <Compile Include="Services\Identity\ApplicationRoleManager.cs" />
     <Compile Include="Services\Identity\ApplicationUserManager.cs" />
     <Compile Include="Services\Identity\ApplicationUserStore.cs" />
@@ -226,6 +231,7 @@
     <Compile Include="Models\Dealer.cs" />
     <Compile Include="Services\Identity\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PreferredDealerProcessor.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +309,11 @@
       <Project>{27ead51b-75c0-49b3-96bc-f44cda1542f8}</Project>
       <Name>Breeze.BusinessTime</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410010519334_Initial.resx">
+      <DependentUpon>201410010519334_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

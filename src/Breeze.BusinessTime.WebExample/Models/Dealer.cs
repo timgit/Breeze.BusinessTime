@@ -9,5 +9,6 @@ namespace Breeze.BusinessTime.WebExample.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
+        public bool Preferred { get; set; }
     }
 }
