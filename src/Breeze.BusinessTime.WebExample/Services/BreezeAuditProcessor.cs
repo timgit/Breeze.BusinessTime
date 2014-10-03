@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Principal;
 using Breeze.BusinessTime.Rules;
 using Breeze.ContextProvider;
-using Microsoft.AspNet.Identity;
 
 namespace Breeze.BusinessTime.WebExample.Services
 {
@@ -22,7 +21,7 @@ namespace Breeze.BusinessTime.WebExample.Services
             saveMap.ToList().ForEach(item => 
                 item.Value.ForEach(entityInfo =>
                 {
-                    var userId = _user.Identity.GetUserId();
+                    var userId = _user.Identity.Name;
                     var action = entityInfo.EntityState.ToString();
                     var entity = item.Key.Name;
                     var key = (int) entityInfo.Entity.GetType().GetProperty("Id").GetValue(entityInfo.Entity);

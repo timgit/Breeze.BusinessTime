@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Breeze.BusinessTime.WebExample.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [BreezeController]
     public class DataController : ApiController, IAmABreezeController
     {
@@ -43,6 +43,12 @@ namespace Breeze.BusinessTime.WebExample.Controllers
         public string Metadata()
         {
             return _contextProvider.Metadata();
+        }
+
+        [HttpGet]
+        public string Test()
+        {
+            return "test";
         }
 
         [HttpPost]
