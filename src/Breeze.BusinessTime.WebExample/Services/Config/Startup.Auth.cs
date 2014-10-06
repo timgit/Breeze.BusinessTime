@@ -13,7 +13,7 @@ namespace Breeze.BusinessTime.WebExample
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = AuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/LogIn"),
+                LoginPath = new PathString("/Home/LogIn"),
                 SlidingExpiration = true,
                 ExpireTimeSpan = new TimeSpan(hours: 1, minutes: 0, seconds: 0)
             });

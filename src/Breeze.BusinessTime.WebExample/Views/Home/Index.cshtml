@@ -6,36 +6,52 @@
 
 
 <div class="row" ng-controller="homeController">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form role="form" name="form">
             <fieldset>
                 <legend>Dealer data</legend>
+                
+                <div class="alert alert-success" ng-if="vm.saveSucceeded">
+                    <strong>Dealer saved successfully.</strong>
+                </div>   
+
+                <div class="alert alert-danger" ng-if="vm.errors">
+                    <strong>Failed</strong>
+                    <ul>
+                        <li ng-repeat="error in vm.errors">{{error.errorMessage}}</li>
+                    </ul>
+                </div>
+
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control" name="Name" />
+                    <input type="text" class="form-control" name="Name" ng-model="dealer.Name" />
+                    <span class="help-block">Setting Name is allowed only for Dealers and Admins.</span>
                 </div>
                 
                 <div class="form-group">
                     <label>Address</label>
-                    <input type="text" class="form-control" name="Address" />
+                    <input type="text" class="form-control" name="Address" ng-model="dealer.Address" />
                 </div>
                 
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="text" class="form-control" name="Phone" />
+                    <input type="text" class="form-control" name="Phone" ng-model="dealer.Phone" />
                 </div>
                 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="Preferred"> Preferred
+                        <input type="checkbox" name="Preferred" ng-model="dealer.Preferred"> Preferred
                     </label>
+                    <span class="help-block">Changing Preferred is only allowed for admins. (See PreferredDealerProcessor)</span>
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-success" disabled="">Save</button>
-                    <span class="help-block">Not implemented yet!</span>
+                    <button class="btn btn-success" ng-click="vm.save()">Save</button>
                 </div>
             </fieldset>
         </form>
+    </div>
+    <div class="col-md-6">
+        <pre>{{dealer._backingStore | json}}</pre>
     </div>
 </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using System.Web.Http;
 using Breeze.BusinessTime.Authorization;
 using Breeze.BusinessTime.WebExample.Models;
@@ -10,7 +11,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Breeze.BusinessTime.WebExample.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    // lock down API by default to be safe.
+    // Use OverrideAuthorization attributes to allow access
+    [Authorize(Roles = "Admin")]
     [BreezeController]
     public class DataController : ApiController, IAmABreezeController
     {
@@ -39,18 +42,19 @@ namespace Breeze.BusinessTime.WebExample.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [OverrideAuthorization, Authorize]
         public string Metadata()
         {
             return _contextProvider.Metadata();
         }
 
         [HttpGet]
-        public string Test()
+        [OverrideAuthorization, Authorize(Roles = "Admin,Dealer,Owner")]
+        public IQueryable<Dealer> Dealers()
         {
-            return "test";
+            return _contextProvider.Context.Dealers;
         }
-
+        
         [HttpPost]
         [OverrideAuthorization, Authorize]
         public SaveResult SaveChanges(JObject saveBundle)

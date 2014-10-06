@@ -182,6 +182,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\AuthenticationTypes.cs" />
     <Compile Include="Services\Config\BreezeWebApiConfig.cs" />
     <Compile Include="Services\Config\BundleConfig.cs" />
