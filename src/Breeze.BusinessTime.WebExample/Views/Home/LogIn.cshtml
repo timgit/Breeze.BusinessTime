@@ -1,6 +1,6 @@
 ﻿<h2>Sign In</h2>
-<form method="post">
+<form method="post" action="@Url.RequestContext.HttpContext.Request.Url">
     <input type="hidden" name="name" value="Dealer Dan" />
-    <input type="hidden" name="role" value="Dealer"/>
-    <input type="submit" value="Log In as Dealer"/>
+    <input type="hidden" name="role" value="Dealer" />
+    <button type="submit">Log in as Dealer</button>
 </form>

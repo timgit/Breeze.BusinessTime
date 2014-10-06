@@ -1,15 +1,20 @@
 ﻿using System.Web.Http;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(Breeze.BusinessTime.WebExample.WebApiConfig), "RegisterWebApiPreStart")]
 namespace Breeze.BusinessTime.WebExample
 {
     public static class WebApiConfig
     {
-        public static void RegisterWebApiPreStart()
+        public static void Register(HttpConfiguration config)
         {
-            GlobalConfiguration.Configuration.Routes.MapHttpRoute(
-                name: null,
-                routeTemplate: "api/{controller}/{action}"
+            // Web API configuration and services
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
         }
     }

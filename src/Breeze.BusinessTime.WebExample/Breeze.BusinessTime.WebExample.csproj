@@ -183,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\AuthenticationTypes.cs" />
+    <Compile Include="Services\Config\BreezeWebApiConfig.cs" />
     <Compile Include="Services\Config\BundleConfig.cs" />
     <Compile Include="Services\Config\FilterConfig.cs" />
     <Compile Include="Services\BreezeAuditProcessor.cs" />
