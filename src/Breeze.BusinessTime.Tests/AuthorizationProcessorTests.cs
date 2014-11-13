@@ -48,13 +48,13 @@ namespace Breeze.BusinessTime.Tests
         }
 
         [Test]
-        public void MissingEntityRegistrationDoesNotDeny()
+        public void MissingEntityRegistrationDenies()
         {
             _entitySaveMap.Add(typeof(FakeEntity), new List<EntityInfo> { new FakeEntityInfo { EntityState = EntityState.Added } });
 
             var processor = CreateAuthorizationProcesser(_adminBob);
 
-            Assert.DoesNotThrow(() => processor.Process(_entitySaveMap), "Unregistered entity type should not be denied.");
+            Assert.Throws<EntityErrorsException>(() => processor.Process(_entitySaveMap), "Unregistered entity type should be denied.");
         }
 
         [Test]

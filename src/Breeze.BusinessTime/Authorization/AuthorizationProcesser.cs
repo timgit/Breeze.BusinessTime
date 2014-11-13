@@ -13,8 +13,8 @@ namespace Breeze.BusinessTime.Authorization
         private IEnumerable<string> RoleWhiteList { get; set; }
         private IAuthorizeAnEntity AuthorizationProvider { get; set; }
 
-        public AuthorizationProcesser(IPrincipal user, params string[] allowedRoles)
-            : this(user, new AttributeAuthorizationProvider<AuthorizeEntityAttribute>(), allowedRoles) { }
+        public AuthorizationProcesser(IPrincipal user, bool permissive = false, params string[] allowedRoles)
+            : this(user, new AttributeAuthorizationProvider<AuthorizeEntityAttribute>(permissive), allowedRoles) { }
 
         public AuthorizationProcesser(IPrincipal user, IAuthorizeAnEntity authProvider, params string[] allowedRoles)
         {
