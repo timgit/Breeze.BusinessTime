@@ -44,9 +44,9 @@
 </ul><h3>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
 
-<p>Breeze.BusinessTime is currently in alpha, so you'll need to fetch the package using the pre-release option. </p>
+<p>Breeze.BusinessTime is <a href="https://www.nuget.org/packages/Breeze.BusinessTime/">hosted on NuGet</a>. Search for it in the Package Manager, or simply run the following command in the Package Manager Console in Visual Studio.</p>
 
-<pre><code>PM&gt; Install-Package Breeze.BusinessTime -Pre
+<pre><code>PM&gt; Install-Package Breeze.BusinessTime
 </code></pre>
 
 <h3>
@@ -54,8 +54,8 @@
 
 <ol>
 <li>Use with your normal Breeze Web API controllers</li>
-<li>Replace your current context provider with an included new shiny one here (May we suggest AuthorizedDbContextProvider?)</li>
-<li>Add AuthorizeEntity attributes to your model classes (if code first) or use the included RegistryAuthorizationProvider</li>
+<li>Replace your current context provider with <code>AuthorizedDbContextProvider</code></li>
+<li>Decorate your model classes (if code first) with <code>AuthorizeEntity</code> attributes or use the fluent registry API if you'd like to see all of your authorization rules in once place.</li>
 <li>Bob's your uncle</li>
 </ol><h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
