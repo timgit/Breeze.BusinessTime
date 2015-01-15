@@ -11,7 +11,7 @@
     <iconUrl>http://timgit.github.io/Breeze.BusinessTime/images/breeze.businesstime.pkg.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Business rules and authorization extensions for Breeze Server for Entity Framework 6</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>2.0.0 breaks the previous behavior of Breeze.BusinessTime by rejecting all changes to entities not registered by default. The constructor of AuthorizedDbContextProvider was modified to accept a permissive flag if you'd like to retain the previous behavior.</releaseNotes>
     <copyright>Copyright 2014</copyright>
 	<tags>javascript WebApi Breeze SPA</tags>
 	<dependencies>
