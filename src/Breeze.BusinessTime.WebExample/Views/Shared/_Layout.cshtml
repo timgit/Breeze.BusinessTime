@@ -28,12 +28,13 @@
             @RenderBody()
         </div>
 
-        @Render.Script("~/Scripts/jquery-*.js")
-        @Render.Script("~/Scripts/jquery.validate*")
+        @Render.Script("~/Scripts/jquery-2.?.?.js")
+        @Render.Script("~/Scripts/jquery.validate.js")
+        @Render.Script("~/Scripts/jquery.validate.unobtrusive.js")
         @Render.Script("~/Scripts/bootstrap.js")
         @Render.Script("~/Scripts/q.js")
-        @Render.Script("~/Scripts/breeze.debug.js")
         @Render.Script("~/Scripts/angular.js")
+        @Render.Script("~/Scripts/breeze.debug.js")
         @Render.Script("~/app/app.js")
 
     </body>

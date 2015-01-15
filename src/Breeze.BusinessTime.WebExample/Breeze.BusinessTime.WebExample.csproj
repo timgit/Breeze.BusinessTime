@@ -174,7 +174,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BreezeWebApiConfig.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\AuthenticationTypes.cs" />
     <Compile Include="Services\Config\BreezeWebApiConfig.cs" />
@@ -999,7 +998,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Breeze.BusinessTime\Breeze.BusinessTime.csproj">
