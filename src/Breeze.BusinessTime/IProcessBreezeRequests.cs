@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Breeze.ContextProvider;
 
-namespace Breeze.BusinessTime.Rules
+namespace Breeze.BusinessTime
 {
     public interface IProcessBreezeRequests
     {

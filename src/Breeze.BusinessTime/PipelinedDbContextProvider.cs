@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Breeze.ContextProvider;
 using Breeze.ContextProvider.EF6;
 
-namespace Breeze.BusinessTime.Rules
+namespace Breeze.BusinessTime
 {
-    public class PipelinedDbContextProvider<T>: EFContextProvider<T> where T : DbContext, new()
+    public class PipelinedDbContextProvider<T>: EFContextProvider<T> where T : class, new()
     {
         public PipelinedDbContextProvider()
         {

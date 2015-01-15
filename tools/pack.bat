@@ -5,17 +5,19 @@ SETLOCAL
 
 SET VERSION=%1
 SET PUSH=%2
-SET SRC=..\src
-SET NUGET=%SRC%\.nuget\nuget.exe
+SET NUGET=..\src\.nuget\nuget.exe
 
-%NUGET% pack %SRC%\breeze.businesstime\breeze.businesstime.nuspec -Version %VERSION%
+SET PACKAGE_SPEC=..\src\breeze.businesstime\breeze.businesstime.nuspec
+SET PACKAGE_NAME=Breeze.BusinessTime
+
+%NUGET% pack %PACKAGE_SPEC% -Version %VERSION%
 
 IF "%PUSH%"=="-push" goto push
 
 goto end
 
 :push
-%NUGET% push Breeze.BusinessTime.%VERSION%.nupkg
+%NUGET% push %PACKAGE_NAME%.%VERSION%.nupkg
 goto end
 
 :error

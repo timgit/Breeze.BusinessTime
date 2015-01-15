@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using Breeze.BusinessTime.Rules;
 using Breeze.ContextProvider;
 
 namespace Breeze.BusinessTime.WebExample.Services

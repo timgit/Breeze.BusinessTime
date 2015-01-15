@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using FileTagger
+<!DOCTYPE html>
 <html ng-app="app">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Breeze.BusinessTime - Example Application</title>
-        @Styles.Render("~/Content/css")
+        @Render.Link("~/Content/bootstrap.css")
+        @Render.Link("~/Content/site.css")
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -26,6 +28,13 @@
             @RenderBody()
         </div>
 
-        @Scripts.Render("~/bundles/javascript")
+        @Render.Script("~/Scripts/jquery-*.js")
+        @Render.Script("~/Scripts/jquery.validate*")
+        @Render.Script("~/Scripts/bootstrap.js")
+        @Render.Script("~/Scripts/q.js")
+        @Render.Script("~/Scripts/breeze.debug.js")
+        @Render.Script("~/Scripts/angular.js")
+        @Render.Script("~/app/app.js")
+
     </body>
 </html>

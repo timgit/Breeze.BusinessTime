@@ -72,11 +72,10 @@
     <Compile Include="Authorization\RegistryAuthorizationProvider.cs" />
     <Compile Include="IAmABreezeController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\IProcessBreezeRequests.cs" />
-    <Compile Include="Rules\PipelinedDbContextProvider.cs" />
+    <Compile Include="IProcessBreezeRequests.cs" />
+    <Compile Include="PipelinedDbContextProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
