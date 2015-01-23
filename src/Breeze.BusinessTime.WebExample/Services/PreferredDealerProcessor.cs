@@ -19,7 +19,7 @@ namespace Breeze.BusinessTime.WebExample.Services
 
         public void Process(Dictionary<Type, List<EntityInfo>> saveMap)
         {
-            if (!_user.IsInRole("Dealer")) return;
+            if (!_user.IsInRole("Admin")) return;
 
             saveMap.ToList().ForEach(item =>
             {
