@@ -1,4 +1,4 @@
 Breeze.BusinessTime
 ===================
 
-Breeze .NET server extensions for enforcing entity authorization and other such business rules in a pipeline
+Breeze.BusinessTime is a BreezeJs .NET server library for enforcing entity authorization and pipelining of business logic.
