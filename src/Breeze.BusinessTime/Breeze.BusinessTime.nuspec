@@ -7,7 +7,7 @@
     <authors>Tim Jones</authors>
     <owners>Tim Jones</owners>
     <licenseUrl>https://github.com/timgit/Breeze.BusinessTime/blob/master/LICENSE</licenseUrl>
-    <projectUrl>http://timgit.github.io/Breeze.BusinessTime</projectUrl>
+    <projectUrl>https://github.com/timgit/Breeze.BusinessTime</projectUrl>
     <iconUrl>http://timgit.github.io/Breeze.BusinessTime/images/breeze.businesstime.pkg.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Business rules and authorization extensions for Breeze Server for Entity Framework 6</description>
