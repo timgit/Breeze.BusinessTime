@@ -161,3 +161,7 @@ This would be added to the context provider like so:
 ```csharp
 _contextProvider.AfterPipeline.Add(new CarNotifierProcessor());
 ```
+
+#Examples
+
+If you would like to see this in action, clone and/or fork this repo and check out the included Breeze.BusinessTime.WebExample project, which is where most of the code above was borrowed from.
